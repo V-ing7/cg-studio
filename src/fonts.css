@@ -1,0 +1,44 @@
+/* ============================================================
+ * 打包字体：Microsoft YaHei (msyh.ttc)
+ * 所有机器都必须用这份字体，不要依赖系统字体——
+ * 不同 OS 的默认中文字体完全不同（Mac=PingFang、Win=YaHei、Linux=Noto），
+ * 会导致文字宽度/换行/抗锯齿全变，画面无法一比一复刻。
+ *
+ * ttc (TrueType Collection) 在 Chromium 99+ 里可以直接 format()，
+ * 用 local() 先尝试本地同名字体加速，找不到就从 public/fonts/ 加载。
+ * ============================================================ */
+
+@font-face {
+  font-family: 'VIng-Chinese';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  /* 多个 local() fallback：先找系统里的 YaHei/PingFang，
+     都没有就从 public/fonts/ 读打包的 msyh.ttc */
+  src: local('Microsoft YaHei'),
+       local('Microsoft YaHei UI'),
+       local('PingFang SC'),
+       local('PingFang SC Regular'),
+       local('Noto Sans CJK SC'),
+       local('Source Han Sans SC'),
+       /* ttc 需要 format("truetype-collection")，但 Remotion 内置
+          Chromium 版本够新可以直接识别，保险起见两个都写 */
+       url('/fonts/msyh.ttc') format('truetype-collection'),
+       url('/fonts/msyh.ttc') format('truetype');
+}
+
+@font-face {
+  font-family: 'VIng-Chinese';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Microsoft YaHei Bold'),
+       local('PingFang SC Bold'),
+       url('/fonts/msyh.ttc') format('truetype-collection'),
+       url('/fonts/msyh.ttc') format('truetype');
+}
+
+/* 英文字体：用系统自带的就好，跨平台 Arial/Helvetica 的字形差异可忽略 */
+:root {
+  --font-cn: 'VIng-Chinese', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}
