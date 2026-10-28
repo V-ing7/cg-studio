@@ -39,11 +39,12 @@ const PanelGlass = ({w, h, r}) => {
   return (
     <svg width={w} height={h} style={{position: 'absolute', left: 0, top: 0}}>
       <defs>
-        {/* 本体：与光标 white 变体完全相同的 tint */}
+        {/* 本体：flat 模式下与 CursorFrost 的 flat tint 完全一致（0.64/0.50/0.43），
+            保证面板和光标同材质、灰度对齐 */}
         <linearGradient id={id + '-body'} x1="0.1" y1="0" x2="0.85" y2="1">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.34)" />
-          <stop offset="46%" stopColor="rgba(240,246,252,0.20)" />
-          <stop offset="100%" stopColor="rgba(216,230,242,0.14)" />
+          <stop offset="0%" stopColor="rgba(255,255,255,0.64)" />
+          <stop offset="46%" stopColor="rgba(244,250,255,0.50)" />
+          <stop offset="100%" stopColor="rgba(224,237,248,0.43)" />
         </linearGradient>
         {/* 颗粒：与光标同一组频率/种子/透明度（grain 0.5） */}
         <filter id={id + '-n1'}>
